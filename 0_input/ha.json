@@ -1,0 +1,93 @@
+[
+    {
+        "id": "20231126_1.jpg",
+        "seat_id": "t700030",
+        "performanceName": "관현악시리즈II <관현악의 기원>",
+        "performanceDate": "2023-11-26",
+        "seatNumber": "1층 6열 05번",
+        "Grade": "R",
+        "image": "/1_photo/20231126_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20231209_1.jpg",
+        "seat_id": "t1000030",
+        "performanceName": "국립창극단 <작창가 프로젝트> 시연회",
+        "performanceDate": "2023-12-09",
+        "seatNumber": "1층 3열 04번",
+        "Grade": "전",
+        "image": "/1_photo/20231209_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20231217_2.jpg",
+        "seat_id": "t800030",
+        "performanceName": "국립국악관현악단 <2023 윈터 콘서트>",
+        "performanceDate": "2023-12-17",
+        "seatNumber": "1층 5열 04번",
+        "Grade": "R",
+        "image": "/1_photo/20231217_2.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20231230_1.jpg",
+        "seat_id": "t800029",
+        "performanceName": "2023 국립극장 <송년판소리>",
+        "performanceDate": "2023-12-30",
+        "seatNumber": "1층 5열 03번",
+        "Grade": "전",
+        "image": "/1_photo/20231230_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20241103_1.jpg",
+        "seat_id": "t800029",
+        "performanceName": "퍼포먼스창극 <더 판:상여소리와 난장판의 경계에서>",
+        "performanceDate": "2024-11-03",
+        "seatNumber": "1층 5열 03번",
+        "Grade": "R",
+        "image": "/1_photo/20241103_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20241201_1.jpg",
+        "seat_id": "t1200028",
+        "performanceName": "국립극장 <마당놀이 모듬전>",
+        "performanceDate": "2024-12-01",
+        "seatNumber": "1층 1열 01번",
+        "Grade": "전",
+        "image": "/1_photo/20241201_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20241215_1.jpg",
+        "seat_id": "t1200030",
+        "performanceName": "국립극장 <마당놀이 모듬전>",
+        "performanceDate": "2024-12-15",
+        "seatNumber": "1층 1열 03번",
+        "Grade": "전",
+        "image": "/1_photo/20241215_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    }
+]

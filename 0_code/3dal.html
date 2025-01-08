@@ -1,0 +1,743 @@
+<html>
+<head>
+    <title>달오름극장</title>
+    <link rel="icon" href="data:;base64,=">
+    <style>
+    	/* 좌석배치도 컨테이너 스타일 */
+        #divContainer {
+            display: inline-block; /* 컨텐츠 크기에 맞게 조정 */
+            margin: 0 auto; /* 중앙 정렬 */
+            text-align: center;
+        }
+        
+        /* 극장 이름 스타일 */
+        .theaterName {
+            display: inline-block;
+            margin-top: 35px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 150px;
+            height: 40px;
+            background-color: #E7E7E7;
+        }
+        
+        /* 범례 컨테이너 스타일 */
+        .seat-legend {
+            margin-top: 400px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 14px;
+            align-items: center;
+        }
+        
+        /* 범례 색상 박스 */
+        .legend-box {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-image {
+            width: 11px; /* 범례 이미지 크기 조정 */
+            height: 12px;
+        }
+        
+        .legend-text {
+            margin: 0;
+        }
+        
+        /* 팝업 기본 스타일 */
+        #popupImage {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 700px;
+            background-color: white;
+            border: 1px solid black; /* 얇은 검정 테두리 */
+            border-radius: 10px; /* 둥근 모서리 */
+            padding: 20px;
+            z-index: 9999;
+            max-width: 500px; /* 팝업의 최대 너비를 500px로 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+            box-sizing: border-box;
+        }
+        
+        /* 팝업 닫기 버튼 (오른쪽 상단) */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 15px;
+            text-align: center;
+            background-color: white;
+            border: 1px solid black;
+            color: black;
+            cursor: pointer;
+            z-index:999;
+        }
+        
+        /* 팝업 이미지 스타일 */
+        #popupImg {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px; /* 이미지도 둥근 모서리 */
+        }
+        
+        /* 공연정보 제목 스타일 */
+        .performance-title {
+            font-size: 20px; /* 글씨 크기 크게 */
+            margin: 0; /* 불필요한 여백 제거 */
+        }
+        /* 공연 정보 섹션 스타일 */
+        .popup-info-performance {
+            margin-top: 5px;
+            font-size: 15px;
+            border-bottom: 1px solid #000; /* 구분선 추가 */
+            margin-bottom: 20px;
+            padding-bottom: 0px;
+        }
+        /* 사진정보 제목 스타일 */
+        .photo-title {
+            font-size: 20px; /* 글씨 크기 크게 */
+            margin: 0; /* 불필요한 여백 제거 */
+        }
+        /* 사진 정보 섹션 스타일 */
+        .popup-info-photo {
+            margin-top: 5px;
+            font-size: 15px;
+            margin-bottom: 0px;
+        }
+        
+        .popup-image-info {
+            text-align: center; /* 내용 가운데 정렬 */
+            font-size: 15px;
+            margin-top: 10px;
+            padding-bottom: px;
+            margin-bottom: 0px;
+        }
+        
+        /* 사진 좌우 넘기기 버튼 중앙 정렬 */
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+    
+        .nav-btn {
+            background-color: gray;
+            color: white;
+            font-size: 15px;
+            padding: 2px;
+            margin: 10px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #45a049;
+        }
+        
+        #changeTheater {
+            position: fixed;
+            display: flex;
+            top: 10px;
+            left: 700px;
+            gap: 10px;
+        }
+        
+        #changeTheater button {
+            padding: 5px;
+            font-size: 14px;
+            background-color: gray;
+            color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="divContainer" class="tk_raffer" style="padding-bottom: 50px; background-image: url('../0_input/dal.gif'); background-repeat: no-repeat; background-position: 0px 0px; width: 655px; height: 486px; left: 50%; top: 50%; margin-top: -9px; margin-left: -5px;">
+        <div id="theaterName" class="theaterName">
+            <p><strong>달오름극장</strong></p>
+        </div>
+        <div id="divSeatArray">
+            <div id="t500010" class="seat" style="position: absolute; left: 136px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500011" class="seat" style="position: absolute; left: 147px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500012" class="seat" style="position: absolute; left: 158px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500013" class="seat" style="position: absolute; left: 169px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500014" class="seat" style="position: absolute; left: 180px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500015" class="seat" style="position: absolute; left: 191px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500016" class="seat" style="position: absolute; left: 202px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500017" class="seat" style="position: absolute; left: 213px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500018" class="seat" style="position: absolute; left: 224px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500023" class="seat" style="position: absolute; left: 279px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500024" class="seat" style="position: absolute; left: 290px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500025" class="seat" style="position: absolute; left: 301px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500026" class="seat" style="position: absolute; left: 312px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500027" class="seat" style="position: absolute; left: 323px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500028" class="seat" style="position: absolute; left: 334px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500029" class="seat" style="position: absolute; left: 345px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500030" class="seat" style="position: absolute; left: 356px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500031" class="seat" style="position: absolute; left: 367px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500036" class="seat" style="position: absolute; left: 422px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500037" class="seat" style="position: absolute; left: 433px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500038" class="seat" style="position: absolute; left: 444px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500039" class="seat" style="position: absolute; left: 455px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500040" class="seat" style="position: absolute; left: 466px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500041" class="seat" style="position: absolute; left: 477px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500042" class="seat" style="position: absolute; left: 488px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500043" class="seat" style="position: absolute; left: 499px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t500044" class="seat" style="position: absolute; left: 510px; top: 120px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600010" class="seat" style="position: absolute; left: 132px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600011" class="seat" style="position: absolute; left: 143px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600012" class="seat" style="position: absolute; left: 154px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600013" class="seat" style="position: absolute; left: 165px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600014" class="seat" style="position: absolute; left: 176px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600015" class="seat" style="position: absolute; left: 187px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600016" class="seat" style="position: absolute; left: 198px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600017" class="seat" style="position: absolute; left: 209px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600018" class="seat" style="position: absolute; left: 220px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600023" class="seat" style="position: absolute; left: 275px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600024" class="seat" style="position: absolute; left: 286px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600025" class="seat" style="position: absolute; left: 297px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600026" class="seat" style="position: absolute; left: 308px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600027" class="seat" style="position: absolute; left: 319px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600028" class="seat" style="position: absolute; left: 330px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600029" class="seat" style="position: absolute; left: 341px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600030" class="seat" style="position: absolute; left: 352px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600031" class="seat" style="position: absolute; left: 363px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600032" class="seat" style="position: absolute; left: 374px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600036" class="seat" style="position: absolute; left: 426px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600037" class="seat" style="position: absolute; left: 437px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600038" class="seat" style="position: absolute; left: 448px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600039" class="seat" style="position: absolute; left: 459px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600040" class="seat" style="position: absolute; left: 470px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600041" class="seat" style="position: absolute; left: 481px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600042" class="seat" style="position: absolute; left: 492px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600043" class="seat" style="position: absolute; left: 503px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t600044" class="seat" style="position: absolute; left: 514px; top: 132px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700009" class="seat" style="position: absolute; left: 125px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700010" class="seat" style="position: absolute; left: 136px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700011" class="seat" style="position: absolute; left: 147px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700012" class="seat" style="position: absolute; left: 158px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700013" class="seat" style="position: absolute; left: 169px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700014" class="seat" style="position: absolute; left: 180px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700015" class="seat" style="position: absolute; left: 191px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700016" class="seat" style="position: absolute; left: 202px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700017" class="seat" style="position: absolute; left: 213px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700022" class="seat" style="position: absolute; left: 268px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700023" class="seat" style="position: absolute; left: 279px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700024" class="seat" style="position: absolute; left: 290px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700025" class="seat" style="position: absolute; left: 301px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700026" class="seat" style="position: absolute; left: 312px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700027" class="seat" style="position: absolute; left: 323px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700028" class="seat" style="position: absolute; left: 334px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700029" class="seat" style="position: absolute; left: 345px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700030" class="seat" style="position: absolute; left: 356px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700031" class="seat" style="position: absolute; left: 367px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700032" class="seat" style="position: absolute; left: 378px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700037" class="seat" style="position: absolute; left: 433px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700038" class="seat" style="position: absolute; left: 444px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700039" class="seat" style="position: absolute; left: 455px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700040" class="seat" style="position: absolute; left: 466px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700041" class="seat" style="position: absolute; left: 477px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700042" class="seat" style="position: absolute; left: 488px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700043" class="seat" style="position: absolute; left: 499px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700044" class="seat" style="position: absolute; left: 510px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t700045" class="seat" style="position: absolute; left: 521px; top: 144px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800009" class="seat" style="position: absolute; left: 121px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800010" class="seat" style="position: absolute; left: 132px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800011" class="seat" style="position: absolute; left: 143px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800012" class="seat" style="position: absolute; left: 154px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800013" class="seat" style="position: absolute; left: 165px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800014" class="seat" style="position: absolute; left: 176px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800015" class="seat" style="position: absolute; left: 187px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800016" class="seat" style="position: absolute; left: 198px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800017" class="seat" style="position: absolute; left: 209px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800022" class="seat" style="position: absolute; left: 264px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800023" class="seat" style="position: absolute; left: 275px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800024" class="seat" style="position: absolute; left: 286px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800025" class="seat" style="position: absolute; left: 297px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800026" class="seat" style="position: absolute; left: 308px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800027" class="seat" style="position: absolute; left: 319px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800028" class="seat" style="position: absolute; left: 330px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800029" class="seat" style="position: absolute; left: 341px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800030" class="seat" style="position: absolute; left: 352px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800031" class="seat" style="position: absolute; left: 363px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800032" class="seat" style="position: absolute; left: 374px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800033" class="seat" style="position: absolute; left: 385px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800037" class="seat" style="position: absolute; left: 437px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800038" class="seat" style="position: absolute; left: 448px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800039" class="seat" style="position: absolute; left: 459px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800040" class="seat" style="position: absolute; left: 470px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800041" class="seat" style="position: absolute; left: 481px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800042" class="seat" style="position: absolute; left: 492px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800043" class="seat" style="position: absolute; left: 503px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800044" class="seat" style="position: absolute; left: 514px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t800045" class="seat" style="position: absolute; left: 525px; top: 156px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900009" class="seat" style="position: absolute; left: 125px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900010" class="seat" style="position: absolute; left: 136px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900011" class="seat" style="position: absolute; left: 147px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900012" class="seat" style="position: absolute; left: 158px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900013" class="seat" style="position: absolute; left: 169px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900014" class="seat" style="position: absolute; left: 180px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900015" class="seat" style="position: absolute; left: 191px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900016" class="seat" style="position: absolute; left: 202px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900021" class="seat" style="position: absolute; left: 257px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900022" class="seat" style="position: absolute; left: 268px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900023" class="seat" style="position: absolute; left: 279px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900024" class="seat" style="position: absolute; left: 290px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900025" class="seat" style="position: absolute; left: 301px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900026" class="seat" style="position: absolute; left: 312px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900027" class="seat" style="position: absolute; left: 323px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900028" class="seat" style="position: absolute; left: 334px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900029" class="seat" style="position: absolute; left: 345px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900030" class="seat" style="position: absolute; left: 356px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900031" class="seat" style="position: absolute; left: 367px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900032" class="seat" style="position: absolute; left: 378px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900033" class="seat" style="position: absolute; left: 389px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900038" class="seat" style="position: absolute; left: 444px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900039" class="seat" style="position: absolute; left: 455px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900040" class="seat" style="position: absolute; left: 466px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900041" class="seat" style="position: absolute; left: 477px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900042" class="seat" style="position: absolute; left: 488px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900043" class="seat" style="position: absolute; left: 499px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900044" class="seat" style="position: absolute; left: 510px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t900045" class="seat" style="position: absolute; left: 521px; top: 168px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000009" class="seat" style="position: absolute; left: 121px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000010" class="seat" style="position: absolute; left: 132px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000011" class="seat" style="position: absolute; left: 143px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000012" class="seat" style="position: absolute; left: 154px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000013" class="seat" style="position: absolute; left: 165px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000014" class="seat" style="position: absolute; left: 176px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000015" class="seat" style="position: absolute; left: 187px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000016" class="seat" style="position: absolute; left: 198px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000021" class="seat" style="position: absolute; left: 253px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000022" class="seat" style="position: absolute; left: 264px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000023" class="seat" style="position: absolute; left: 275px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000024" class="seat" style="position: absolute; left: 286px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000025" class="seat" style="position: absolute; left: 297px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000026" class="seat" style="position: absolute; left: 308px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000027" class="seat" style="position: absolute; left: 319px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000028" class="seat" style="position: absolute; left: 330px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000029" class="seat" style="position: absolute; left: 341px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000030" class="seat" style="position: absolute; left: 352px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000031" class="seat" style="position: absolute; left: 363px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000032" class="seat" style="position: absolute; left: 374px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000033" class="seat" style="position: absolute; left: 385px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000034" class="seat" style="position: absolute; left: 396px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000038" class="seat" style="position: absolute; left: 448px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000039" class="seat" style="position: absolute; left: 459px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000040" class="seat" style="position: absolute; left: 470px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000041" class="seat" style="position: absolute; left: 481px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000042" class="seat" style="position: absolute; left: 492px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000043" class="seat" style="position: absolute; left: 503px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000044" class="seat" style="position: absolute; left: 514px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1000045" class="seat" style="position: absolute; left: 525px; top: 180px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100009" class="seat" style="position: absolute; left: 125px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100010" class="seat" style="position: absolute; left: 136px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100011" class="seat" style="position: absolute; left: 147px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100012" class="seat" style="position: absolute; left: 158px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100013" class="seat" style="position: absolute; left: 169px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100014" class="seat" style="position: absolute; left: 180px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100015" class="seat" style="position: absolute; left: 191px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100020" class="seat" style="position: absolute; left: 246px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100021" class="seat" style="position: absolute; left: 257px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100022" class="seat" style="position: absolute; left: 268px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100023" class="seat" style="position: absolute; left: 279px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100024" class="seat" style="position: absolute; left: 290px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100025" class="seat" style="position: absolute; left: 301px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100026" class="seat" style="position: absolute; left: 312px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100027" class="seat" style="position: absolute; left: 323px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100028" class="seat" style="position: absolute; left: 334px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100029" class="seat" style="position: absolute; left: 345px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100030" class="seat" style="position: absolute; left: 356px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100031" class="seat" style="position: absolute; left: 367px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100032" class="seat" style="position: absolute; left: 378px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100033" class="seat" style="position: absolute; left: 389px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100034" class="seat" style="position: absolute; left: 400px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100039" class="seat" style="position: absolute; left: 455px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100040" class="seat" style="position: absolute; left: 466px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100041" class="seat" style="position: absolute; left: 477px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100042" class="seat" style="position: absolute; left: 488px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100043" class="seat" style="position: absolute; left: 499px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100044" class="seat" style="position: absolute; left: 510px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1100045" class="seat" style="position: absolute; left: 521px; top: 192px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200010" class="seat" style="position: absolute; left: 132px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200011" class="seat" style="position: absolute; left: 143px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200012" class="seat" style="position: absolute; left: 154px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200013" class="seat" style="position: absolute; left: 165px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200014" class="seat" style="position: absolute; left: 176px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200015" class="seat" style="position: absolute; left: 187px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200020" class="seat" style="position: absolute; left: 242px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200021" class="seat" style="position: absolute; left: 253px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200022" class="seat" style="position: absolute; left: 264px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200023" class="seat" style="position: absolute; left: 275px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200024" class="seat" style="position: absolute; left: 286px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200025" class="seat" style="position: absolute; left: 297px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200026" class="seat" style="position: absolute; left: 308px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200027" class="seat" style="position: absolute; left: 319px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200028" class="seat" style="position: absolute; left: 330px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200029" class="seat" style="position: absolute; left: 341px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200030" class="seat" style="position: absolute; left: 352px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200031" class="seat" style="position: absolute; left: 363px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200032" class="seat" style="position: absolute; left: 374px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200033" class="seat" style="position: absolute; left: 385px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200034" class="seat" style="position: absolute; left: 396px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200035" class="seat" style="position: absolute; left: 407px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200039" class="seat" style="position: absolute; left: 459px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200040" class="seat" style="position: absolute; left: 470px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200041" class="seat" style="position: absolute; left: 481px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200042" class="seat" style="position: absolute; left: 492px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200043" class="seat" style="position: absolute; left: 503px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1200044" class="seat" style="position: absolute; left: 514px; top: 204px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300009" class="seat" style="position: absolute; left: 125px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300010" class="seat" style="position: absolute; left: 136px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300011" class="seat" style="position: absolute; left: 147px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300012" class="seat" style="position: absolute; left: 158px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300013" class="seat" style="position: absolute; left: 169px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300014" class="seat" style="position: absolute; left: 180px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300019" class="seat" style="position: absolute; left: 235px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300020" class="seat" style="position: absolute; left: 246px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300021" class="seat" style="position: absolute; left: 257px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300022" class="seat" style="position: absolute; left: 268px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300023" class="seat" style="position: absolute; left: 279px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300024" class="seat" style="position: absolute; left: 290px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300025" class="seat" style="position: absolute; left: 301px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300026" class="seat" style="position: absolute; left: 312px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300027" class="seat" style="position: absolute; left: 323px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300028" class="seat" style="position: absolute; left: 334px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300029" class="seat" style="position: absolute; left: 345px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300030" class="seat" style="position: absolute; left: 356px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300031" class="seat" style="position: absolute; left: 367px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300032" class="seat" style="position: absolute; left: 378px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300033" class="seat" style="position: absolute; left: 389px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300034" class="seat" style="position: absolute; left: 400px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300035" class="seat" style="position: absolute; left: 411px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300040" class="seat" style="position: absolute; left: 466px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300041" class="seat" style="position: absolute; left: 477px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300042" class="seat" style="position: absolute; left: 488px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300043" class="seat" style="position: absolute; left: 499px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300044" class="seat" style="position: absolute; left: 510px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1300045" class="seat" style="position: absolute; left: 521px; top: 216px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400004" class="seat" style="position: absolute; left: 46px; top: 212px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400005" class="seat" style="position: absolute; left: 57px; top: 212px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400010" class="seat" style="position: absolute; left: 132px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400011" class="seat" style="position: absolute; left: 143px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400012" class="seat" style="position: absolute; left: 154px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400013" class="seat" style="position: absolute; left: 165px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400014" class="seat" style="position: absolute; left: 176px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400019" class="seat" style="position: absolute; left: 231px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400020" class="seat" style="position: absolute; left: 242px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400021" class="seat" style="position: absolute; left: 253px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400022" class="seat" style="position: absolute; left: 264px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400023" class="seat" style="position: absolute; left: 275px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400024" class="seat" style="position: absolute; left: 286px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400025" class="seat" style="position: absolute; left: 297px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400026" class="seat" style="position: absolute; left: 308px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400027" class="seat" style="position: absolute; left: 319px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400028" class="seat" style="position: absolute; left: 330px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400029" class="seat" style="position: absolute; left: 341px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400030" class="seat" style="position: absolute; left: 352px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400031" class="seat" style="position: absolute; left: 363px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400032" class="seat" style="position: absolute; left: 374px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400033" class="seat" style="position: absolute; left: 385px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400034" class="seat" style="position: absolute; left: 396px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400035" class="seat" style="position: absolute; left: 407px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400036" class="seat" style="position: absolute; left: 418px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400040" class="seat" style="position: absolute; left: 470px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400041" class="seat" style="position: absolute; left: 481px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400042" class="seat" style="position: absolute; left: 492px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400043" class="seat" style="position: absolute; left: 503px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400044" class="seat" style="position: absolute; left: 514px; top: 228px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400049" class="seat" style="position: absolute; left: 589px; top: 212px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1400050" class="seat" style="position: absolute; left: 600px; top: 212px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500049" class="seat" style="position: absolute; left: 589px; top: 224px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600049" class="seat" style="position: absolute; left: 589px; top: 236px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500005" class="seat" style="position: absolute; left: 57px; top: 224px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500009" class="seat" style="position: absolute; left: 125px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500010" class="seat" style="position: absolute; left: 136px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500011" class="seat" style="position: absolute; left: 147px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500012" class="seat" style="position: absolute; left: 158px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500013" class="seat" style="position: absolute; left: 169px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500018" class="seat" style="position: absolute; left: 224px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500019" class="seat" style="position: absolute; left: 235px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500020" class="seat" style="position: absolute; left: 246px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500021" class="seat" style="position: absolute; left: 257px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500022" class="seat" style="position: absolute; left: 268px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500023" class="seat" style="position: absolute; left: 279px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500024" class="seat" style="position: absolute; left: 290px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500025" class="seat" style="position: absolute; left: 301px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500026" class="seat" style="position: absolute; left: 312px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500027" class="seat" style="position: absolute; left: 323px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500028" class="seat" style="position: absolute; left: 334px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500029" class="seat" style="position: absolute; left: 345px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500030" class="seat" style="position: absolute; left: 356px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500031" class="seat" style="position: absolute; left: 367px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500032" class="seat" style="position: absolute; left: 378px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500033" class="seat" style="position: absolute; left: 389px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500034" class="seat" style="position: absolute; left: 400px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500035" class="seat" style="position: absolute; left: 411px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500036" class="seat" style="position: absolute; left: 422px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500041" class="seat" style="position: absolute; left: 477px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500042" class="seat" style="position: absolute; left: 488px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500043" class="seat" style="position: absolute; left: 499px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500044" class="seat" style="position: absolute; left: 510px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1500045" class="seat" style="position: absolute; left: 521px; top: 240px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600005" class="seat" style="position: absolute; left: 57px; top: 236px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600009" class="seat" style="position: absolute; left: 121px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600010" class="seat" style="position: absolute; left: 132px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600011" class="seat" style="position: absolute; left: 143px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600012" class="seat" style="position: absolute; left: 154px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600013" class="seat" style="position: absolute; left: 165px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600020" class="seat" style="position: absolute; left: 246px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600021" class="seat" style="position: absolute; left: 257px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600022" class="seat" style="position: absolute; left: 268px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600023" class="seat" style="position: absolute; left: 279px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600024" class="seat" style="position: absolute; left: 290px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600025" class="seat" style="position: absolute; left: 301px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600026" class="seat" style="position: absolute; left: 312px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600027" class="seat" style="position: absolute; left: 323px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600028" class="seat" style="position: absolute; left: 334px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600029" class="seat" style="position: absolute; left: 345px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600030" class="seat" style="position: absolute; left: 356px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600031" class="seat" style="position: absolute; left: 367px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600032" class="seat" style="position: absolute; left: 378px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600033" class="seat" style="position: absolute; left: 389px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600041" class="seat" style="position: absolute; left: 481px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600042" class="seat" style="position: absolute; left: 492px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600043" class="seat" style="position: absolute; left: 503px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600044" class="seat" style="position: absolute; left: 514px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1600045" class="seat" style="position: absolute; left: 525px; top: 252px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700010" class="seat" style="position: absolute; left: 136px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700011" class="seat" style="position: absolute; left: 147px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700012" class="seat" style="position: absolute; left: 158px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700020" class="seat" style="position: absolute; left: 242px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700021" class="seat" style="position: absolute; left: 253px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700032" class="seat" style="position: absolute; left: 382px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700033" class="seat" style="position: absolute; left: 393px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700042" class="seat" style="position: absolute; left: 488px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700043" class="seat" style="position: absolute; left: 499px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1700044" class="seat" style="position: absolute; left: 510px; top: 264px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1800005" class="seat" style="position: absolute; left: 57px; top: 260px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1800049" class="seat" style="position: absolute; left: 589px; top: 260px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1900049" class="seat" style="position: absolute; left: 589px; top: 272px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000049" class="seat" style="position: absolute; left: 589px; top: 284px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t1900005" class="seat" style="position: absolute; left: 57px; top: 272px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000005" class="seat" style="position: absolute; left: 57px; top: 284px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000012" class="seat" style="position: absolute; left: 158px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000013" class="seat" style="position: absolute; left: 169px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000014" class="seat" style="position: absolute; left: 180px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000015" class="seat" style="position: absolute; left: 191px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000016" class="seat" style="position: absolute; left: 202px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000021" class="seat" style="position: absolute; left: 257px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000022" class="seat" style="position: absolute; left: 268px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000023" class="seat" style="position: absolute; left: 279px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000024" class="seat" style="position: absolute; left: 290px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000025" class="seat" style="position: absolute; left: 301px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000026" class="seat" style="position: absolute; left: 312px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000027" class="seat" style="position: absolute; left: 323px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000028" class="seat" style="position: absolute; left: 334px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000029" class="seat" style="position: absolute; left: 345px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000030" class="seat" style="position: absolute; left: 356px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000031" class="seat" style="position: absolute; left: 367px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000032" class="seat" style="position: absolute; left: 378px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000033" class="seat" style="position: absolute; left: 389px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000034" class="seat" style="position: absolute; left: 400px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000039" class="seat" style="position: absolute; left: 455px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000040" class="seat" style="position: absolute; left: 466px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000041" class="seat" style="position: absolute; left: 477px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000042" class="seat" style="position: absolute; left: 488px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2000043" class="seat" style="position: absolute; left: 499px; top: 300px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100011" class="seat" style="position: absolute; left: 151px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100012" class="seat" style="position: absolute; left: 162px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100013" class="seat" style="position: absolute; left: 173px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100014" class="seat" style="position: absolute; left: 184px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100015" class="seat" style="position: absolute; left: 195px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100016" class="seat" style="position: absolute; left: 206px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100020" class="seat" style="position: absolute; left: 252px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100021" class="seat" style="position: absolute; left: 263px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100022" class="seat" style="position: absolute; left: 274px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100023" class="seat" style="position: absolute; left: 285px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100024" class="seat" style="position: absolute; left: 296px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100025" class="seat" style="position: absolute; left: 307px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100026" class="seat" style="position: absolute; left: 318px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100027" class="seat" style="position: absolute; left: 329px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100028" class="seat" style="position: absolute; left: 340px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100029" class="seat" style="position: absolute; left: 351px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100030" class="seat" style="position: absolute; left: 362px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100031" class="seat" style="position: absolute; left: 373px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100032" class="seat" style="position: absolute; left: 384px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100033" class="seat" style="position: absolute; left: 395px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100034" class="seat" style="position: absolute; left: 406px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100039" class="seat" style="position: absolute; left: 451px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100040" class="seat" style="position: absolute; left: 462px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100041" class="seat" style="position: absolute; left: 473px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100042" class="seat" style="position: absolute; left: 484px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100043" class="seat" style="position: absolute; left: 495px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2100044" class="seat" style="position: absolute; left: 506px; top: 312px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200005" class="seat" style="position: absolute; left: 57px; top: 308px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200012" class="seat" style="position: absolute; left: 158px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200013" class="seat" style="position: absolute; left: 169px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200014" class="seat" style="position: absolute; left: 180px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200015" class="seat" style="position: absolute; left: 191px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200016" class="seat" style="position: absolute; left: 202px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200020" class="seat" style="position: absolute; left: 246px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200021" class="seat" style="position: absolute; left: 257px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200022" class="seat" style="position: absolute; left: 268px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200023" class="seat" style="position: absolute; left: 279px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200024" class="seat" style="position: absolute; left: 290px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200025" class="seat" style="position: absolute; left: 301px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200026" class="seat" style="position: absolute; left: 312px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200027" class="seat" style="position: absolute; left: 323px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200028" class="seat" style="position: absolute; left: 334px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200029" class="seat" style="position: absolute; left: 345px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200030" class="seat" style="position: absolute; left: 356px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200031" class="seat" style="position: absolute; left: 367px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200032" class="seat" style="position: absolute; left: 378px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200033" class="seat" style="position: absolute; left: 389px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200034" class="seat" style="position: absolute; left: 400px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200035" class="seat" style="position: absolute; left: 411px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200039" class="seat" style="position: absolute; left: 455px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200040" class="seat" style="position: absolute; left: 466px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200041" class="seat" style="position: absolute; left: 477px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200042" class="seat" style="position: absolute; left: 488px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200043" class="seat" style="position: absolute; left: 499px; top: 324px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2200049" class="seat" style="position: absolute; left: 589px; top: 308px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300005" class="seat" style="position: absolute; left: 57px; top: 320px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300012" class="seat" style="position: absolute; left: 154px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300013" class="seat" style="position: absolute; left: 165px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300014" class="seat" style="position: absolute; left: 176px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300015" class="seat" style="position: absolute; left: 187px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300016" class="seat" style="position: absolute; left: 198px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300019" class="seat" style="position: absolute; left: 239px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300020" class="seat" style="position: absolute; left: 250px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300021" class="seat" style="position: absolute; left: 261px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300022" class="seat" style="position: absolute; left: 272px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300023" class="seat" style="position: absolute; left: 283px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300024" class="seat" style="position: absolute; left: 294px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300025" class="seat" style="position: absolute; left: 305px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300026" class="seat" style="position: absolute; left: 316px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300027" class="seat" style="position: absolute; left: 327px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300028" class="seat" style="position: absolute; left: 338px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300029" class="seat" style="position: absolute; left: 349px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300030" class="seat" style="position: absolute; left: 360px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300031" class="seat" style="position: absolute; left: 371px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300032" class="seat" style="position: absolute; left: 382px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300033" class="seat" style="position: absolute; left: 393px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300034" class="seat" style="position: absolute; left: 404px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300035" class="seat" style="position: absolute; left: 415px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300039" class="seat" style="position: absolute; left: 459px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300040" class="seat" style="position: absolute; left: 470px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300041" class="seat" style="position: absolute; left: 481px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300042" class="seat" style="position: absolute; left: 492px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300043" class="seat" style="position: absolute; left: 503px; top: 336px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2300049" class="seat" style="position: absolute; left: 589px; top: 320px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400005" class="seat" style="position: absolute; left: 57px; top: 332px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400013" class="seat" style="position: absolute; left: 161px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400014" class="seat" style="position: absolute; left: 172px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400015" class="seat" style="position: absolute; left: 183px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400016" class="seat" style="position: absolute; left: 194px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400019" class="seat" style="position: absolute; left: 235px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400020" class="seat" style="position: absolute; left: 246px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400021" class="seat" style="position: absolute; left: 257px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400022" class="seat" style="position: absolute; left: 268px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400023" class="seat" style="position: absolute; left: 279px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400024" class="seat" style="position: absolute; left: 290px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400025" class="seat" style="position: absolute; left: 301px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400026" class="seat" style="position: absolute; left: 312px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400027" class="seat" style="position: absolute; left: 323px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400028" class="seat" style="position: absolute; left: 334px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400029" class="seat" style="position: absolute; left: 345px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400030" class="seat" style="position: absolute; left: 356px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400031" class="seat" style="position: absolute; left: 367px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400032" class="seat" style="position: absolute; left: 378px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400033" class="seat" style="position: absolute; left: 389px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400034" class="seat" style="position: absolute; left: 400px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400035" class="seat" style="position: absolute; left: 411px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400036" class="seat" style="position: absolute; left: 422px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400039" class="seat" style="position: absolute; left: 463px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400040" class="seat" style="position: absolute; left: 474px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400041" class="seat" style="position: absolute; left: 485px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400042" class="seat" style="position: absolute; left: 496px; top: 348px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2400049" class="seat" style="position: absolute; left: 589px; top: 332px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500011" class="seat" style="position: absolute; left: 147px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500012" class="seat" style="position: absolute; left: 158px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500013" class="seat" style="position: absolute; left: 169px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500014" class="seat" style="position: absolute; left: 180px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500015" class="seat" style="position: absolute; left: 191px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500016" class="seat" style="position: absolute; left: 202px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500039" class="seat" style="position: absolute; left: 455px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500040" class="seat" style="position: absolute; left: 466px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500041" class="seat" style="position: absolute; left: 477px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500042" class="seat" style="position: absolute; left: 488px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500043" class="seat" style="position: absolute; left: 499px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+            <div id="t2500044" class="seat" style="position: absolute; left: 510px; top: 360px; height:12; width:11; background-image: url('../0_input/ic_seat86.gif');"></div>
+        </div>
+        
+        <!-- 범례-->
+        <div id="seatLegend" class="seat-legend">
+        </div>
+    </div>
+    
+    <div id="changeTheater" class="change-theater">
+        <button id="hae">해오름극장</button>
+        <button id="dal">달오름극장</button>
+        <button id="ha">하늘극장</button>
+        <button id="main">메인화면</button>
+    </div>
+    <!-- 팝업 창 -->
+    <div id="popupImage" style="display: none;">
+        <div class="popup-content">
+            <!-- 팝업 닫기 버튼 -->
+            <button id="closePopupBtn" class="close-btn">X</button>
+
+            <!-- 사진 영역 -->
+            <div id="Img" style="position:relative; display: inline-block;">
+                <img id="popupImg" src="" alt="사진" class="popup-img">
+                <div id="copyright-box" style="position: absolute; display: inline-block; bottom: 0; right: 0; background-color: rgba(255,255,255,0.5); color: black; text-align: center; padding: 0px 10px; font-size: 12px; height: 25px; line-height: 3px;">
+                    <p>ⓒ<span id="copyright">정보 없음</span></p>
+                </div>
+            </div>
+            
+            <!-- 공연 정보 -->
+            <div class="popup-info-performance">
+                <p class="performance-title"><strong>공연정보</strong></p>
+                <p><strong>공연명</strong>: <span id="performanceName">정보 없음</span></p>
+                <p><strong>촬영 날짜</strong>: <span id="performanceDate">정보 없음</span></p>
+                <p><strong>좌석 번호</strong>: [<span id="Grade">정보 없음</span>석]<span id="seatNumber">정보 없음</span></p>
+            </div>
+            <div class="popup-info-photo">
+                <p class="photo-title"><strong>사진정보</strong></p>
+                <p><strong>촬영 기기</strong>: <span id="cameraModel">정보 없음</span></p> 
+                <p><strong>촬영 화각</strong>: <span id="focalLength">정보 없음</span></p>
+            </div>
+            
+            <div class="popup-image-info">
+                <p>[ <span id="currentImageIndex">1</span> / <span id="totalImageCount">1</span>]</p>
+            </div>
+            <!-- 사진 넘기기 버튼 -->
+            <div class="navigation-buttons">
+                <button id="prevBtn" class="nav-btn">◀</button>
+                <button id="nextBtn" class="nav-btn">▶</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script src="2ntok.js"></script> <!-- 외부 스크립트 연결 -->
+    <script>
+        // 페이지 로드 시 JSON 파일을 읽고 좌석을 업데이트
+        window.onload = function() {
+            loadSeatData('../0_input/dal.json');  // JSON 파일을 읽어서 좌석 업데이트
+        };
+        
+    </script>
+</div>
+</body>
+</html>
