@@ -1,7 +1,6 @@
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>����ȭ��</title>
+    <title>메인화면</title>
     <link rel="icon" href="data:;base64,=">
     <style>
         #theaterList button {
@@ -18,25 +17,25 @@
 </head>
 <body>
     <div id="pageTitle" class="page-title">
-        <p> �������� ������ �þ� ����</p>
+        <p> 국립극장 공연장 시야 사진</p>
     </div>
     
     <div id="theaterList" class="theater-list">
-        <button id="hae">�ؿ�������</button>
-        <button id="dal">�޿�������</button>
-        <button id="ha">�ϴñ���</button>
+        <button id="hae">해오름극장</button>
+        <button id="dal">달오름극장</button>
+        <button id="ha">하늘극장</button>
         
     </div>
     
     <script>
         document.getElementById('hae').addEventListener('click', function() {
-            window.location.href = './0_code/3hae.html'; // �̵��� HTML �������� ���
+            window.location.href = '3hae.html'; // 이동할 HTML 페이지의 경로
         });
         document.getElementById('dal').addEventListener('click', function() {
-            window.location.href = './0_code/3dal.html'; // �̵��� HTML �������� ���
+            window.location.href = '3dal.html'; // 이동할 HTML 페이지의 경로
         });
         document.getElementById('ha').addEventListener('click', function() {
-            window.location.href = './0_code/3ha.html'; // �̵��� HTML �������� ���
+            window.location.href = '3ha.html'; // 이동할 HTML 페이지의 경로
         });
     </script>
 </body>
