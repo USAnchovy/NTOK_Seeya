@@ -32,7 +32,7 @@
         "performanceDate": "2023-11-11",
         "seatNumber": "1층 8열 06번",
         "Grade": "VIP",
-        "image": "./1_photo/20231111_1.jpg",
+        "image": "../1_photo/20231111_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
