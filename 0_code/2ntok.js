@@ -165,7 +165,7 @@ document.getElementById('ha').addEventListener('click', function() {
 });
 
 document.getElementById('main').addEventListener('click', function() {
-    window.location.href = '3main.html'; // 이동할 HTML 페이지의 경로
+    window.location.href = '../index.html'; // 이동할 HTML 페이지의 경로
 });
 
 function createSeatLegend() {
