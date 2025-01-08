@@ -1,16 +1,17 @@
 <html>
 <head>
-    <title>ÇØ¿À¸§±ØÀå</title>
+    <meta charset="UTF-8">
+    <title>ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</title>
     <link rel="icon" href="data:;base64,=">
     <style>
-        /* ÁÂ¼®¹èÄ¡µµ ÄÁÅ×ÀÌ³Ê ½ºÅ¸ÀÏ */
+        /* ï¿½Â¼ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         #divContainer1 {
-            display: inline-block; /* ÄÁÅÙÃ÷ Å©±â¿¡ ¸Â°Ô Á¶Á¤ */
-            margin: 0 auto; /* Áß¾Ó Á¤·Ä */
+            display: inline-block; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¿¡ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+            margin: 0 auto; /* ï¿½ß¾ï¿½ ï¿½ï¿½ï¿½ï¿½ */
             text-align: center;
         }
         
-        /* ±ØÀå ÀÌ¸§ ½ºÅ¸ÀÏ */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         .theaterName {
             display: inline-block;
             margin-top: -50px;
@@ -21,7 +22,7 @@
             background-color: #E7E7E7;
         }
         
-        /* ¹ü·Ê ÄÁÅ×ÀÌ³Ê ½ºÅ¸ÀÏ */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         .seat-legend {
             margin-top: 550px;
             display: flex;
@@ -31,7 +32,7 @@
             align-items: center;
         }
         
-        /* ¹ü·Ê »ö»ó ¹Ú½º */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ */
         .legend-box {
             display: flex;
             align-items: center;
@@ -39,7 +40,7 @@
         }
         
         .legend-image {
-            width: 11px; /* ¹ü·Ê ÀÌ¹ÌÁö Å©±â Á¶Á¤ */
+            width: 11px; /* ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
             height: 12px;
         }
         
@@ -47,23 +48,23 @@
             margin: 0;
         }
         
-        /* ÆË¾÷ ±âº» ½ºÅ¸ÀÏ */
+        /* ï¿½Ë¾ï¿½ ï¿½âº» ï¿½ï¿½Å¸ï¿½ï¿½ */
         #popupImage {
             display: none;
             position: fixed;
             top: 80px;
             left: 700px;
             background-color: white;
-            border: 1px solid black; /* ¾ãÀº °ËÁ¤ Å×µÎ¸® */
-            border-radius: 10px; /* µÕ±Ù ¸ð¼­¸® */
+            border: 1px solid black; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×µÎ¸ï¿½ */
+            border-radius: 10px; /* ï¿½Õ±ï¿½ ï¿½ð¼­¸ï¿½ */
             padding: 20px;
             z-index: 9999;
-            max-width: 500px; /* ÆË¾÷ÀÇ ÃÖ´ë ³Êºñ¸¦ 500px·Î ¼³Á¤ */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ±×¸²ÀÚ È¿°ú */
+            max-width: 500px; /* ï¿½Ë¾ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Êºï¿½ 500pxï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ï¿½×¸ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ */
             box-sizing: border-box;
         }
         
-        /* ÆË¾÷ ´Ý±â ¹öÆ° (¿À¸¥ÂÊ »ó´Ü) */
+        /* ï¿½Ë¾ï¿½ ï¿½Ý±ï¿½ ï¿½ï¿½Æ° (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½) */
         .close-btn {
             position: absolute;
             top: 15px;
@@ -77,32 +78,32 @@
             z-index:999;
         }
         
-        /* ÆË¾÷ ÀÌ¹ÌÁö ½ºÅ¸ÀÏ */
+        /* ï¿½Ë¾ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         #popupImg {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 10px; /* ÀÌ¹ÌÁöµµ µÕ±Ù ¸ð¼­¸® */
+            border-radius: 10px; /* ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ±ï¿½ ï¿½ð¼­¸ï¿½ */
         }
-        /* °ø¿¬Á¤º¸ Á¦¸ñ ½ºÅ¸ÀÏ */
+        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         .performance-title {
-            font-size: 20px; /* ±Û¾¾ Å©±â Å©°Ô */
-            margin: 0; /* ºÒÇÊ¿äÇÑ ¿©¹é Á¦°Å */
+            font-size: 20px; /* ï¿½Û¾ï¿½ Å©ï¿½ï¿½ Å©ï¿½ï¿½ */
+            margin: 0; /* ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
         }
-        /* °ø¿¬ Á¤º¸ ¼½¼Ç ½ºÅ¸ÀÏ */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         .popup-info-performance {
             margin-top: 5px;
             font-size: 15px;
-            border-bottom: 1px solid #000; /* ±¸ºÐ¼± Ãß°¡ */
+            border-bottom: 1px solid #000; /* ï¿½ï¿½ï¿½Ð¼ï¿½ ï¿½ß°ï¿½ */
             margin-bottom: 20px;
             padding-bottom: 0px;
         }
-        /* »çÁøÁ¤º¸ Á¦¸ñ ½ºÅ¸ÀÏ */
+        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         .photo-title {
-            font-size: 20px; /* ±Û¾¾ Å©±â Å©°Ô */
-            margin: 0; /* ºÒÇÊ¿äÇÑ ¿©¹é Á¦°Å */
+            font-size: 20px; /* ï¿½Û¾ï¿½ Å©ï¿½ï¿½ Å©ï¿½ï¿½ */
+            margin: 0; /* ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
         }
-        /* »çÁø Á¤º¸ ¼½¼Ç ½ºÅ¸ÀÏ */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
         .popup-info-photo {
             margin-top: 5px;
             font-size: 15px;
@@ -110,14 +111,14 @@
         }
         
         .popup-image-info {
-            text-align: center; /* ³»¿ë °¡¿îµ¥ Á¤·Ä */
+            text-align: center; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½îµ¥ ï¿½ï¿½ï¿½ï¿½ */
             font-size: 15px;
             margin-top: 10px;
             padding-bottom: px;
             margin-bottom: 0px;
         }
         
-        /* »çÁø ÁÂ¿ì ³Ñ±â±â ¹öÆ° Áß¾Ó Á¤·Ä */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½Â¿ï¿½ ï¿½Ñ±ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ß¾ï¿½ ï¿½ï¿½ï¿½ï¿½ */
         .navigation-buttons {
             display: flex;
             justify-content: center;
@@ -162,7 +163,7 @@
 <body>
     <div id="divContainer1" class="tk_raffer" style="padding-top: 50px; background-image: url('../0_input/hae_1.gif'); background-repeat: no-repeat; background-position: 0px 0px; width: 680px; height: 600px; left: 50%; top: 50%; margin-top: -9px; margin-left: -9px;">
         <div id="theaterName" class="theaterName">
-            <p><strong>ÇØ¿À¸§±ØÀå</strong></p>
+            <p><strong>ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</strong></p>
         </div>
         <div id="divSeatArray1">
             <div id="t400011" class="seat" style="position: absolute; left: 180px; top: 111px; height:12; width:11; transform: rotate(376.4deg); background-image: url('../0_input/ic_seat86.gif');" data-transform="rotate(376.4)"></div>
@@ -917,7 +918,7 @@
             <div id="t3000039" class="seat" style="position: absolute; left: 487px; top: 430px; height:12; width:11; transform: rotate(352.0deg); background-image: url('../0_input/ic_seat86.gif');" data-transform="rotate(352.0)"></div>
         </div>
         
-        <!-- ¹ü·Ê-->
+        <!-- ï¿½ï¿½ï¿½ï¿½-->
         <div id="seatLegend" class="seat-legend">
         </div>
         
@@ -1403,54 +1404,54 @@
     </div>
     
     <div id="changeTheater" class="change-theater">
-        <button id="hae">ÇØ¿À¸§±ØÀå</button>
-        <button id="dal">´Þ¿À¸§±ØÀå</button>
-        <button id="ha">ÇÏ´Ã±ØÀå</button>
-        <button id="main">¸ÞÀÎÈ­¸é</button>
+        <button id="hae">ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</button>
+        <button id="dal">ï¿½Þ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</button>
+        <button id="ha">ï¿½Ï´Ã±ï¿½ï¿½ï¿½</button>
+        <button id="main">ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½</button>
     </div>
-    <!-- ÆË¾÷ Ã¢ -->
+    <!-- ï¿½Ë¾ï¿½ Ã¢ -->
     <div id="popupImage" style="display: none;">
         <div class="popup-content">
-            <!-- ÆË¾÷ ´Ý±â ¹öÆ° -->
+            <!-- ï¿½Ë¾ï¿½ ï¿½Ý±ï¿½ ï¿½ï¿½Æ° -->
             <button id="closePopupBtn" class="close-btn">X</button>
 
-            <!-- »çÁø ¿µ¿ª -->
+            <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -->
             <div id="Img" style="position:relative; display: inline-block;">
-                <img id="popupImg" src="" alt="»çÁø" class="popup-img">
+                <img id="popupImg" src="" alt="ï¿½ï¿½ï¿½ï¿½" class="popup-img">
                 <div id="copyright-box" style="position: absolute; display: inline-block; bottom: 0; right: 0; background-color: rgba(255,255,255,0.5); color: black; text-align: center; padding: 0px 10px; font-size: 12px; height: 25px; line-height: 3px;">
-                    <p>¨Ï<span id="copyright">Á¤º¸ ¾øÀ½</span></p>
+                    <p>ï¿½ï¿½<span id="copyright">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span></p>
                 </div>
             </div>
             
-            <!-- °ø¿¬ Á¤º¸ -->
+            <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -->
             <div class="popup-info-performance">
-                <p class="performance-title"><strong>°ø¿¬Á¤º¸</strong></p>
-                <p><strong>°ø¿¬¸í</strong>: <span id="performanceName">Á¤º¸ ¾øÀ½</span></p>
-                <p><strong>ÃÔ¿µ ³¯Â¥</strong>: <span id="performanceDate">Á¤º¸ ¾øÀ½</span></p>
-                <p><strong>ÁÂ¼® ¹øÈ£</strong>: [<span id="Grade">Á¤º¸ ¾øÀ½</span>¼®]<span id="seatNumber">Á¤º¸ ¾øÀ½</span></p>
+                <p class="performance-title"><strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</strong></p>
+                <p><strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</strong>: <span id="performanceName">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span></p>
+                <p><strong>ï¿½Ô¿ï¿½ ï¿½ï¿½Â¥</strong>: <span id="performanceDate">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span></p>
+                <p><strong>ï¿½Â¼ï¿½ ï¿½ï¿½È£</strong>: [<span id="Grade">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span>ï¿½ï¿½]<span id="seatNumber">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span></p>
             </div>
             <div class="popup-info-photo">
-                <p class="photo-title"><strong>»çÁøÁ¤º¸</strong></p>
-                <p><strong>ÃÔ¿µ ±â±â</strong>: <span id="cameraModel">Á¤º¸ ¾øÀ½</span></p> 
-                <p><strong>ÃÔ¿µ È­°¢</strong>: <span id="focalLength">Á¤º¸ ¾øÀ½</span></p>
+                <p class="photo-title"><strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</strong></p>
+                <p><strong>ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½</strong>: <span id="cameraModel">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span></p> 
+                <p><strong>ï¿½Ô¿ï¿½ È­ï¿½ï¿½</strong>: <span id="focalLength">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span></p>
             </div>
             
             <div class="popup-image-info">
                 <p>[ <span id="currentImageIndex">1</span> / <span id="totalImageCount">1</span>]</p>
             </div>
-            <!-- »çÁø ³Ñ±â±â ¹öÆ° -->
+            <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½ ï¿½ï¿½Æ° -->
             <div class="navigation-buttons">
-                <button id="prevBtn" class="nav-btn">¢¸</button>
-                <button id="nextBtn" class="nav-btn">¢º</button>
+                <button id="prevBtn" class="nav-btn">ï¿½ï¿½</button>
+                <button id="nextBtn" class="nav-btn">ï¿½ï¿½</button>
             </div>
         </div>
     </div>
     
-    <script src="2ntok.js"></script> <!-- ¿ÜºÎ ½ºÅ©¸³Æ® ¿¬°á -->
+    <script src="2ntok.js"></script> <!-- ï¿½Üºï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ -->
     <script>
-        // ÆäÀÌÁö ·Îµå ½Ã JSON ÆÄÀÏÀ» ÀÐ°í ÁÂ¼®À» ¾÷µ¥ÀÌÆ®
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð°ï¿½ ï¿½Â¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         window.onload = function() {
-            loadSeatData('../0_input/hae.json');  // JSON ÆÄÀÏÀ» ÀÐ¾î¼­ ÁÂ¼® ¾÷µ¥ÀÌÆ®
+            loadSeatData('../0_input/hae.json');  // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾î¼­ ï¿½Â¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         };
         
     </script>
