@@ -52,7 +52,7 @@
             display: none;
             position: fixed;
             top: 80px;
-            left: 700px;
+            left: 50%;
             background-color: white;
             border: 1px solid black; /* 얇은 검정 테두리 */
             border-radius: 10px; /* 둥근 모서리 */
@@ -62,7 +62,14 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
             box-sizing: border-box;
         }
-        
+        @media (max-width: 768px) {
+            #popupImage {
+                left: 50%;
+                transform: translate(-50%, 0);
+                max-width: 95%;
+                max-height: 95%;
+            }
+        }
         /* 팝업 닫기 버튼 (오른쪽 상단) */
         .close-btn {
             position: absolute;
