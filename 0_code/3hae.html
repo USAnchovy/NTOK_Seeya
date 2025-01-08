@@ -1,17 +1,16 @@
-<html>
+﻿<html>
 <head>
-    <meta charset="UTF-8">
-    <title>�ؿ�������</title>
+    <title>해오름극장</title>
     <link rel="icon" href="data:;base64,=">
     <style>
-        /* �¼���ġ�� �����̳� ��Ÿ�� */
+        /* 좌석배치도 컨테이너 스타일 */
         #divContainer1 {
-            display: inline-block; /* ������ ũ�⿡ �°� ���� */
-            margin: 0 auto; /* �߾� ���� */
+            display: inline-block; /* 컨텐츠 크기에 맞게 조정 */
+            margin: 0 auto; /* 중앙 정렬 */
             text-align: center;
         }
         
-        /* ���� �̸� ��Ÿ�� */
+        /* 극장 이름 스타일 */
         .theaterName {
             display: inline-block;
             margin-top: -50px;
@@ -22,7 +21,7 @@
             background-color: #E7E7E7;
         }
         
-        /* ���� �����̳� ��Ÿ�� */
+        /* 범례 컨테이너 스타일 */
         .seat-legend {
             margin-top: 550px;
             display: flex;
@@ -32,7 +31,7 @@
             align-items: center;
         }
         
-        /* ���� ���� �ڽ� */
+        /* 범례 색상 박스 */
         .legend-box {
             display: flex;
             align-items: center;
@@ -40,7 +39,7 @@
         }
         
         .legend-image {
-            width: 11px; /* ���� �̹��� ũ�� ���� */
+            width: 11px; /* 범례 이미지 크기 조정 */
             height: 12px;
         }
         
@@ -48,23 +47,23 @@
             margin: 0;
         }
         
-        /* �˾� �⺻ ��Ÿ�� */
+        /* 팝업 기본 스타일 */
         #popupImage {
             display: none;
             position: fixed;
             top: 80px;
             left: 700px;
             background-color: white;
-            border: 1px solid black; /* ���� ���� �׵θ� */
-            border-radius: 10px; /* �ձ� �𼭸� */
+            border: 1px solid black; /* 얇은 검정 테두리 */
+            border-radius: 10px; /* 둥근 모서리 */
             padding: 20px;
             z-index: 9999;
-            max-width: 500px; /* �˾��� �ִ� �ʺ� 500px�� ���� */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* �׸��� ȿ�� */
+            max-width: 500px; /* 팝업의 최대 너비를 500px로 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
             box-sizing: border-box;
         }
         
-        /* �˾� �ݱ� ��ư (������ ���) */
+        /* 팝업 닫기 버튼 (오른쪽 상단) */
         .close-btn {
             position: absolute;
             top: 15px;
@@ -78,32 +77,32 @@
             z-index:999;
         }
         
-        /* �˾� �̹��� ��Ÿ�� */
+        /* 팝업 이미지 스타일 */
         #popupImg {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 10px; /* �̹����� �ձ� �𼭸� */
+            border-radius: 10px; /* 이미지도 둥근 모서리 */
         }
-        /* �������� ���� ��Ÿ�� */
+        /* 공연정보 제목 스타일 */
         .performance-title {
-            font-size: 20px; /* �۾� ũ�� ũ�� */
-            margin: 0; /* ���ʿ��� ���� ���� */
+            font-size: 20px; /* 글씨 크기 크게 */
+            margin: 0; /* 불필요한 여백 제거 */
         }
-        /* ���� ���� ���� ��Ÿ�� */
+        /* 공연 정보 섹션 스타일 */
         .popup-info-performance {
             margin-top: 5px;
             font-size: 15px;
-            border-bottom: 1px solid #000; /* ���м� �߰� */
+            border-bottom: 1px solid #000; /* 구분선 추가 */
             margin-bottom: 20px;
             padding-bottom: 0px;
         }
-        /* �������� ���� ��Ÿ�� */
+        /* 사진정보 제목 스타일 */
         .photo-title {
-            font-size: 20px; /* �۾� ũ�� ũ�� */
-            margin: 0; /* ���ʿ��� ���� ���� */
+            font-size: 20px; /* 글씨 크기 크게 */
+            margin: 0; /* 불필요한 여백 제거 */
         }
-        /* ���� ���� ���� ��Ÿ�� */
+        /* 사진 정보 섹션 스타일 */
         .popup-info-photo {
             margin-top: 5px;
             font-size: 15px;
@@ -111,14 +110,14 @@
         }
         
         .popup-image-info {
-            text-align: center; /* ���� ��� ���� */
+            text-align: center; /* 내용 가운데 정렬 */
             font-size: 15px;
             margin-top: 10px;
             padding-bottom: px;
             margin-bottom: 0px;
         }
         
-        /* ���� �¿� �ѱ�� ��ư �߾� ���� */
+        /* 사진 좌우 넘기기 버튼 중앙 정렬 */
         .navigation-buttons {
             display: flex;
             justify-content: center;
@@ -163,7 +162,7 @@
 <body>
     <div id="divContainer1" class="tk_raffer" style="padding-top: 50px; background-image: url('../0_input/hae_1.gif'); background-repeat: no-repeat; background-position: 0px 0px; width: 680px; height: 600px; left: 50%; top: 50%; margin-top: -9px; margin-left: -9px;">
         <div id="theaterName" class="theaterName">
-            <p><strong>�ؿ�������</strong></p>
+            <p><strong>해오름극장</strong></p>
         </div>
         <div id="divSeatArray1">
             <div id="t400011" class="seat" style="position: absolute; left: 180px; top: 111px; height:12; width:11; transform: rotate(376.4deg); background-image: url('../0_input/ic_seat86.gif');" data-transform="rotate(376.4)"></div>
@@ -918,7 +917,7 @@
             <div id="t3000039" class="seat" style="position: absolute; left: 487px; top: 430px; height:12; width:11; transform: rotate(352.0deg); background-image: url('../0_input/ic_seat86.gif');" data-transform="rotate(352.0)"></div>
         </div>
         
-        <!-- ����-->
+        <!-- 범례-->
         <div id="seatLegend" class="seat-legend">
         </div>
         
@@ -1404,54 +1403,54 @@
     </div>
     
     <div id="changeTheater" class="change-theater">
-        <button id="hae">�ؿ�������</button>
-        <button id="dal">�޿�������</button>
-        <button id="ha">�ϴñ���</button>
-        <button id="main">����ȭ��</button>
+        <button id="hae">해오름극장</button>
+        <button id="dal">달오름극장</button>
+        <button id="ha">하늘극장</button>
+        <button id="main">메인화면</button>
     </div>
-    <!-- �˾� â -->
+    <!-- 팝업 창 -->
     <div id="popupImage" style="display: none;">
         <div class="popup-content">
-            <!-- �˾� �ݱ� ��ư -->
+            <!-- 팝업 닫기 버튼 -->
             <button id="closePopupBtn" class="close-btn">X</button>
 
-            <!-- ���� ���� -->
+            <!-- 사진 영역 -->
             <div id="Img" style="position:relative; display: inline-block;">
-                <img id="popupImg" src="" alt="����" class="popup-img">
+                <img id="popupImg" src="" alt="사진" class="popup-img">
                 <div id="copyright-box" style="position: absolute; display: inline-block; bottom: 0; right: 0; background-color: rgba(255,255,255,0.5); color: black; text-align: center; padding: 0px 10px; font-size: 12px; height: 25px; line-height: 3px;">
-                    <p>��<span id="copyright">���� ����</span></p>
+                    <p>ⓒ<span id="copyright">정보 없음</span></p>
                 </div>
             </div>
             
-            <!-- ���� ���� -->
+            <!-- 공연 정보 -->
             <div class="popup-info-performance">
-                <p class="performance-title"><strong>��������</strong></p>
-                <p><strong>������</strong>: <span id="performanceName">���� ����</span></p>
-                <p><strong>�Կ� ��¥</strong>: <span id="performanceDate">���� ����</span></p>
-                <p><strong>�¼� ��ȣ</strong>: [<span id="Grade">���� ����</span>��]<span id="seatNumber">���� ����</span></p>
+                <p class="performance-title"><strong>공연정보</strong></p>
+                <p><strong>공연명</strong>: <span id="performanceName">정보 없음</span></p>
+                <p><strong>촬영 날짜</strong>: <span id="performanceDate">정보 없음</span></p>
+                <p><strong>좌석 번호</strong>: [<span id="Grade">정보 없음</span>석]<span id="seatNumber">정보 없음</span></p>
             </div>
             <div class="popup-info-photo">
-                <p class="photo-title"><strong>��������</strong></p>
-                <p><strong>�Կ� ���</strong>: <span id="cameraModel">���� ����</span></p> 
-                <p><strong>�Կ� ȭ��</strong>: <span id="focalLength">���� ����</span></p>
+                <p class="photo-title"><strong>사진정보</strong></p>
+                <p><strong>촬영 기기</strong>: <span id="cameraModel">정보 없음</span></p> 
+                <p><strong>촬영 화각</strong>: <span id="focalLength">정보 없음</span></p>
             </div>
             
             <div class="popup-image-info">
                 <p>[ <span id="currentImageIndex">1</span> / <span id="totalImageCount">1</span>]</p>
             </div>
-            <!-- ���� �ѱ�� ��ư -->
+            <!-- 사진 넘기기 버튼 -->
             <div class="navigation-buttons">
-                <button id="prevBtn" class="nav-btn">��</button>
-                <button id="nextBtn" class="nav-btn">��</button>
+                <button id="prevBtn" class="nav-btn">◀</button>
+                <button id="nextBtn" class="nav-btn">▶</button>
             </div>
         </div>
     </div>
     
-    <script src="2ntok.js"></script> <!-- �ܺ� ��ũ��Ʈ ���� -->
+    <script src="2ntok.js"></script> <!-- 외부 스크립트 연결 -->
     <script>
-        // ������ �ε� �� JSON ������ �а� �¼��� ������Ʈ
+        // 페이지 로드 시 JSON 파일을 읽고 좌석을 업데이트
         window.onload = function() {
-            loadSeatData('../0_input/hae.json');  // JSON ������ �о �¼� ������Ʈ
+            loadSeatData('../0_input/hae.json');  // JSON 파일을 읽어서 좌석 업데이트
         };
         
     </script>
