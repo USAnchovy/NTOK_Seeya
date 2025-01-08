@@ -66,10 +66,10 @@
     },
     {
         "id": "20231001_1.jpg",
-        "seat_id": "t900041",
+        "seat_id": "t600014",
         "performanceName": "국립창극단 <심청가>",
         "performanceDate": "2023-10-01",
-        "seatNumber": "1층 E열 25번",
+        "seatNumber": "1층 B열 05번",
         "Grade": "R",
         "image": "../1_photo/20231001_1.jpg",
         "available": true,
