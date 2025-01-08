@@ -1,9 +1,9 @@
-// JSON ÆÄÀÏÀ» ÀĞ¾î¿À´Â ÇÔ¼ö
+ï»¿// JSON íŒŒì¼ì„ ì½ì–´ì˜¤ëŠ” í•¨ìˆ˜
 function loadSeatData(file) {
-    fetch(file)  // JSON ÆÄÀÏÀÇ °æ·Î¸¦ ÁöÁ¤
-        .then(response => response.json())  // JSON µ¥ÀÌÅÍ·Î º¯È¯
+    fetch(file)  // JSON íŒŒì¼ì˜ ê²½ë¡œë¥¼ ì§€ì •
+        .then(response => response.json())  // JSON ë°ì´í„°ë¡œ ë³€í™˜
         .then(seatData => {
-            // ÁÂ¼® ¾÷µ¥ÀÌÆ® ÇÔ¼ö È£Ãâ
+            // ì¢Œì„ ì—…ë°ì´íŠ¸ í•¨ìˆ˜ í˜¸ì¶œ
             updateSeats(seatData);
         })
         .catch(error => {
@@ -13,52 +13,52 @@ function loadSeatData(file) {
 
 
 let currentImageIndex = 0;
-let seatImages = [];  // ÇöÀç ¼±ÅÃµÈ ÁÂ¼®ÀÇ ÀÌ¹ÌÁöµé
+let seatImages = [];  // í˜„ì¬ ì„ íƒëœ ì¢Œì„ì˜ ì´ë¯¸ì§€ë“¤
 
-// ÁÂ¼®ÀÇ »óÅÂ¿Í ÀÌ¹ÌÁö¸¦ ¾÷µ¥ÀÌÆ®ÇÏ´Â ÇÔ¼ö
+// ì¢Œì„ì˜ ìƒíƒœì™€ ì´ë¯¸ì§€ë¥¼ ì—…ë°ì´íŠ¸í•˜ëŠ” í•¨ìˆ˜
 function updateSeats(seatData) {
     seatData.forEach(seat => {
         const seatElement = document.getElementById(seat.seat_id);
 
         if (seatElement) {
-            // °°Àº seat_id¸¦ °¡Áø µ¥ÀÌÅÍ ÇÊÅÍ¸µÇÏ¿© »çÁø °³¼ö °è»ê
+            // ê°™ì€ seat_idë¥¼ ê°€ì§„ ë°ì´í„° í•„í„°ë§í•˜ì—¬ ì‚¬ì§„ ê°œìˆ˜ ê³„ì‚°
             const relatedImages = seatData.filter(data => data.seat_id === seat.seat_id);
-            const imageCount = relatedImages.length; // »çÁø °³¼ö
+            const imageCount = relatedImages.length; // ì‚¬ì§„ ê°œìˆ˜
             
-            // »çÁø °³¼ö¿¡ µû¶ó »ö»ó º¯°æ
+            // ì‚¬ì§„ ê°œìˆ˜ì— ë”°ë¼ ìƒ‰ìƒ ë³€ê²½
             if (imageCount === 1) {
                 seatElement.style.backgroundImage = `url('../0_input/ic_seat4.gif')`;
             } else if (imageCount <= 2) {
-                seatElement.style.backgroundImage = `url('../0_input/ic_seat5.gif')`; // »çÁø 2°³
+                seatElement.style.backgroundImage = `url('../0_input/ic_seat5.gif')`; // ì‚¬ì§„ 2ê°œ
             } else if (imageCount <= 3) {
-                seatElement.style.backgroundImage = `url('../0_input/ic_seat3.gif')`; // »çÁø 3°³
+                seatElement.style.backgroundImage = `url('../0_input/ic_seat3.gif')`; // ì‚¬ì§„ 3ê°œ
             } else {
-                seatElement.style.backgroundImage = `url('../0_input/ic_seat6.gif')`; // »çÁø 4°³ ÀÌ»ó
+                seatElement.style.backgroundImage = `url('../0_input/ic_seat6.gif')`; // ì‚¬ì§„ 4ê°œ ì´ìƒ
             }
             
-            // ¿¹¾à °¡´É ¿©ºÎ¿¡ µû¶ó ¹öÆ° È°¼ºÈ­
+            // ì˜ˆì•½ ê°€ëŠ¥ ì—¬ë¶€ì— ë”°ë¼ ë²„íŠ¼ í™œì„±í™”
             if (seat.available) {
-                seatElement.style.cursor = "pointer"; // È°¼ºÈ­µÈ ÁÂ¼®
+                seatElement.style.cursor = "pointer"; // í™œì„±í™”ëœ ì¢Œì„
             } else {
-                seatElement.style.cursor = "not-allowed"; // ºñÈ°¼ºÈ­µÈ ÁÂ¼®
+                seatElement.style.cursor = "not-allowed"; // ë¹„í™œì„±í™”ëœ ì¢Œì„
             }
 
-            // ÅøÆÁ Ãß°¡ (¼±ÅÃ »çÇ×)
+            // íˆ´íŒ ì¶”ê°€ (ì„ íƒ ì‚¬í•­)
             seatElement.title = `${seat.seatNumber}`;
 
-            // ¸¶¿ì½º Å¬¸¯ ÀÌº¥Æ® ¼³Á¤ (click ÀÌº¥Æ®·Î ÆË¾÷ Ç¥½Ã)
+            // ë§ˆìš°ìŠ¤ í´ë¦­ ì´ë²¤íŠ¸ ì„¤ì • (click ì´ë²¤íŠ¸ë¡œ íŒì—… í‘œì‹œ)
             seatElement.addEventListener("click", function(event) {
-                // ÁÂ¼®¿¡ ÇØ´çÇÏ´Â »çÁø ¹è¿­À» Àü´Ş
-                showPopupImage(event, seat, seatData);  // ÁÂ¼®¿¡ ÇØ´çÇÏ´Â »çÁø ¹è¿­À» Àü´Ş
+                // ì¢Œì„ì— í•´ë‹¹í•˜ëŠ” ì‚¬ì§„ ë°°ì—´ì„ ì „ë‹¬
+                showPopupImage(event, seat, seatData);  // ì¢Œì„ì— í•´ë‹¹í•˜ëŠ” ì‚¬ì§„ ë°°ì—´ì„ ì „ë‹¬
             });
         }
     });
 }
 
 
-// ÆË¾÷ ÀÌ¹ÌÁö¸¦ ¶ç¿ì°í ¼û±â´Â ÇÔ¼ö
+// íŒì—… ì´ë¯¸ì§€ë¥¼ ë„ìš°ê³  ìˆ¨ê¸°ëŠ” í•¨ìˆ˜
 function showPopupImage(event, seatData, allSeatData) {
-    // °°Àº seat_id¿¡ ÇØ´çÇÏ´Â ¸ğµç ÀÌ¹ÌÁö¸¦ Ã£±â
+    // ê°™ì€ seat_idì— í•´ë‹¹í•˜ëŠ” ëª¨ë“  ì´ë¯¸ì§€ë¥¼ ì°¾ê¸°
     seatImages = allSeatData.filter(seat => seat.seat_id === seatData.seat_id).map(seat => seat.image);
 
     if (seatImages.length === 0) {
@@ -66,14 +66,14 @@ function showPopupImage(event, seatData, allSeatData) {
         return;
     }
 
-    currentImageIndex = 0;  // Ã¹ ¹øÂ° »çÁøºÎÅÍ ½ÃÀÛ
+    currentImageIndex = 0;  // ì²« ë²ˆì§¸ ì‚¬ì§„ë¶€í„° ì‹œì‘
 
     const popup = document.getElementById("popupImage");
     const img = document.getElementById("popupImg");
     const currentImageText = document.getElementById("currentImageIndex");
     const totalImageText = document.getElementById("totalImageCount");
 
-    // ÁÂ¼® Á¤º¸¿Í ÃÔ¿µ Á¤º¸
+    // ì¢Œì„ ì •ë³´ì™€ ì´¬ì˜ ì •ë³´
     const performanceName = document.getElementById("performanceName");
     const performanceDate = document.getElementById("performanceDate");
     const seatNumber = document.getElementById("seatNumber");
@@ -82,126 +82,126 @@ function showPopupImage(event, seatData, allSeatData) {
     const focalLength = document.getElementById("focalLength");
     const copyright = document.getElementById("copyright");
 
-    // ÇØ´ç ÀÌ¹ÌÁö¿¡ ´ëÇÑ »ó¼¼ Á¤º¸ Ã£±â
+    // í•´ë‹¹ ì´ë¯¸ì§€ì— ëŒ€í•œ ìƒì„¸ ì •ë³´ ì°¾ê¸°
     const seatInfo = allSeatData.filter(seat => seat.image === seatImages[currentImageIndex])[0];
 
 
-    // ÆË¾÷ ³»¿ë ¼³Á¤
-    img.src = seatImages[currentImageIndex];  // Ã¹ ¹øÂ° ÀÌ¹ÌÁö·Î ¼³Á¤
+    // íŒì—… ë‚´ìš© ì„¤ì •
+    img.src = seatImages[currentImageIndex];  // ì²« ë²ˆì§¸ ì´ë¯¸ì§€ë¡œ ì„¤ì •
     currentImageText.textContent = currentImageIndex + 1;
     totalImageText.textContent = seatImages.length;
 
-    // ÁÂ¼® Á¤º¸ ¼³Á¤
-    performanceName.textContent = seatInfo.performanceName || "Á¤º¸ ¾øÀ½";
-    performanceDate.textContent = seatInfo.performanceDate || "Á¤º¸ ¾øÀ½";
-    seatNumber.textContent = seatInfo.seatNumber || "Á¤º¸ ¾øÀ½";
-    Grade.textContent = seatInfo.Grade || "Á¤º¸ ¾øÀ½";
+    // ì¢Œì„ ì •ë³´ ì„¤ì •
+    performanceName.textContent = seatInfo.performanceName || "ì •ë³´ ì—†ìŒ";
+    performanceDate.textContent = seatInfo.performanceDate || "ì •ë³´ ì—†ìŒ";
+    seatNumber.textContent = seatInfo.seatNumber || "ì •ë³´ ì—†ìŒ";
+    Grade.textContent = seatInfo.Grade || "ì •ë³´ ì—†ìŒ";
 
-    // ÃÔ¿µ Á¤º¸ ¼³Á¤
-    cameraModel.textContent = seatInfo.model || "Á¤º¸ ¾øÀ½";
-    focalLength.textContent = seatInfo.focal || "Á¤º¸ ¾øÀ½";
-    copyright.textContent = seatInfo.copyright || "Á¤º¸ ¾øÀ½";
+    // ì´¬ì˜ ì •ë³´ ì„¤ì •
+    cameraModel.textContent = seatInfo.model || "ì •ë³´ ì—†ìŒ";
+    focalLength.textContent = seatInfo.focal || "ì •ë³´ ì—†ìŒ";
+    copyright.textContent = seatInfo.copyright || "ì •ë³´ ì—†ìŒ";
 
-    // ÆË¾÷ Ç¥½Ã
+    // íŒì—… í‘œì‹œ
     popup.style.display = "block";
     
     
-    // `changeImage` ÇÔ¼ö¿¡ `allSeatData`¸¦ Àü´Ş
+    // `changeImage` í•¨ìˆ˜ì— `allSeatData`ë¥¼ ì „ë‹¬
     window.changeImage = function(direction) {
-        // ÀÌ¹ÌÁö ³Ñ±â±â
+        // ì´ë¯¸ì§€ ë„˜ê¸°ê¸°
         currentImageIndex = (currentImageIndex + direction + seatImages.length) % seatImages.length;
         const img = document.getElementById("popupImg");
         const currentImageText = document.getElementById("currentImageIndex");
         const seatInfo = allSeatData.filter(seat => seat.image === seatImages[currentImageIndex])[0];
 
-        // ÀÌ¹ÌÁö ¾÷µ¥ÀÌÆ®
+        // ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸
         img.src = seatImages[currentImageIndex];
         currentImageText.textContent = currentImageIndex + 1;
 
-        // ÁÂ¼® Á¤º¸ ¾÷µ¥ÀÌÆ®
-        document.getElementById("performanceName").textContent = seatInfo.performanceName || "Á¤º¸ ¾øÀ½";
-        document.getElementById("performanceDate").textContent = seatInfo.performanceDate || "Á¤º¸ ¾øÀ½";
-        document.getElementById("seatNumber").textContent = seatInfo.seatNumber || "Á¤º¸ ¾øÀ½";
-        document.getElementById("Grade").textContent = seatInfo.Grade || "Á¤º¸ ¾øÀ½";
+        // ì¢Œì„ ì •ë³´ ì—…ë°ì´íŠ¸
+        document.getElementById("performanceName").textContent = seatInfo.performanceName || "ì •ë³´ ì—†ìŒ";
+        document.getElementById("performanceDate").textContent = seatInfo.performanceDate || "ì •ë³´ ì—†ìŒ";
+        document.getElementById("seatNumber").textContent = seatInfo.seatNumber || "ì •ë³´ ì—†ìŒ";
+        document.getElementById("Grade").textContent = seatInfo.Grade || "ì •ë³´ ì—†ìŒ";
 
-        // ÃÔ¿µ Á¤º¸ ¾÷µ¥ÀÌÆ®
-        document.getElementById("cameraModel").textContent = seatInfo.model || "Á¤º¸ ¾øÀ½";
-        document.getElementById("focalLength").textContent = seatInfo.focal || "Á¤º¸ ¾øÀ½";
-        document.getElementById("copyright").textContent = seatInfo.copyright || "Á¤º¸ ¾øÀ½";
+        // ì´¬ì˜ ì •ë³´ ì—…ë°ì´íŠ¸
+        document.getElementById("cameraModel").textContent = seatInfo.model || "ì •ë³´ ì—†ìŒ";
+        document.getElementById("focalLength").textContent = seatInfo.focal || "ì •ë³´ ì—†ìŒ";
+        document.getElementById("copyright").textContent = seatInfo.copyright || "ì •ë³´ ì—†ìŒ";
     }
 }
 
-// ÆË¾÷ Ã¢À» ´İ´Â ÇÔ¼ö
+// íŒì—… ì°½ì„ ë‹«ëŠ” í•¨ìˆ˜
 function closePopup() {
     const popup = document.getElementById("popupImage");
     popup.style.display = "none";
 }
 
 
-// ÆË¾÷ ´İ±â ¹öÆ° Å¬¸¯ ½Ã
+// íŒì—… ë‹«ê¸° ë²„íŠ¼ í´ë¦­ ì‹œ
 document.getElementById("closePopupBtn").addEventListener("click", closePopup);
 
-// ÁÂ¿ì ¹æÇâÅ°·Î ÀÌ¹ÌÁö ³Ñ±â±â
+// ì¢Œìš° ë°©í–¥í‚¤ë¡œ ì´ë¯¸ì§€ ë„˜ê¸°ê¸°
 document.getElementById("prevBtn").addEventListener("click", function() {
-    changeImage(-1);  // ÀÌÀü ÀÌ¹ÌÁö
+    changeImage(-1);  // ì´ì „ ì´ë¯¸ì§€
 });
 
 document.getElementById("nextBtn").addEventListener("click", function() {
-    changeImage(1);  // ´ÙÀ½ ÀÌ¹ÌÁö
+    changeImage(1);  // ë‹¤ìŒ ì´ë¯¸ì§€
 });
 
 
-// ±ØÀå ¹Ù²Ù±â
+// ê·¹ì¥ ë°”ê¾¸ê¸°
 document.getElementById('hae').addEventListener('click', function() {
-    window.location.href = '3hae.html'; // ÀÌµ¿ÇÒ HTML ÆäÀÌÁöÀÇ °æ·Î
+    window.location.href = '3hae.html'; // ì´ë™í•  HTML í˜ì´ì§€ì˜ ê²½ë¡œ
 });
 
 document.getElementById('dal').addEventListener('click', function() {
-    window.location.href = '3dal.html'; // ÀÌµ¿ÇÒ HTML ÆäÀÌÁöÀÇ °æ·Î
+    window.location.href = '3dal.html'; // ì´ë™í•  HTML í˜ì´ì§€ì˜ ê²½ë¡œ
 });
 
 document.getElementById('ha').addEventListener('click', function() {
-    window.location.href = '3ha.html'; // ÀÌµ¿ÇÒ HTML ÆäÀÌÁöÀÇ °æ·Î
+    window.location.href = '3ha.html'; // ì´ë™í•  HTML í˜ì´ì§€ì˜ ê²½ë¡œ
 });
 
 document.getElementById('main').addEventListener('click', function() {
-    window.location.href = '3main.html'; // ÀÌµ¿ÇÒ HTML ÆäÀÌÁöÀÇ °æ·Î
+    window.location.href = '3main.html'; // ì´ë™í•  HTML í˜ì´ì§€ì˜ ê²½ë¡œ
 });
 
 function createSeatLegend() {
     const legendData = [
-        { image: '../0_input/ic_seat4.gif', text: '1°³' },
-        { image: '../0_input/ic_seat5.gif', text: '2°³' },
-        { image: '../0_input/ic_seat3.gif', text: '3°³' },
-        { image: '../0_input/ic_seat6.gif', text: '4°³ ÀÌ»ó' }
+        { image: '../0_input/ic_seat4.gif', text: '1ê°œ' },
+        { image: '../0_input/ic_seat5.gif', text: '2ê°œ' },
+        { image: '../0_input/ic_seat3.gif', text: '3ê°œ' },
+        { image: '../0_input/ic_seat6.gif', text: '4ê°œ ì´ìƒ' }
     ];
 
     const legendContainer = document.getElementById('seatLegend');
-    legendContainer.innerHTML = ''; // ±âÁ¸ ³»¿ë ÃÊ±âÈ­
+    legendContainer.innerHTML = ''; // ê¸°ì¡´ ë‚´ìš© ì´ˆê¸°í™”
 
     legendData.forEach(legend => {
         const legendItem = document.createElement('div');
         legendItem.className = 'legend-box';
 
-        // ÀÌ¹ÌÁö Ãß°¡
+        // ì´ë¯¸ì§€ ì¶”ê°€
         const img = document.createElement('img');
         img.className = 'legend-image';
         img.src = legend.image;
         img.alt = legend.text;
 
-        // ÅØ½ºÆ® Ãß°¡
+        // í…ìŠ¤íŠ¸ ì¶”ê°€
         const text = document.createElement('span');
         text.className = 'legend-text';
         text.textContent = legend.text;
 
-        // ¿ä¼Ò °áÇÕ
+        // ìš”ì†Œ ê²°í•©
         legendItem.appendChild(img);
         legendItem.appendChild(text);
 
-        // ¹ü·Ê ÄÁÅ×ÀÌ³Ê¿¡ Ãß°¡
+        // ë²”ë¡€ ì»¨í…Œì´ë„ˆì— ì¶”ê°€
         legendContainer.appendChild(legendItem);
     });
 }
 
-// ¹ü·Ê »ı¼º ÇÔ¼ö È£Ãâ
+// ë²”ë¡€ ìƒì„± í•¨ìˆ˜ í˜¸ì¶œ
 createSeatLegend();
