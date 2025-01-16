@@ -78,6 +78,25 @@
             z-index:999;
         }
         
+        @media (max-width: 1280px) {
+            #popupImage {
+                left: 50%;
+                max-width: 48%;
+                max-height: 70%;
+            }
+        }
+
+        @media (max-width: 1080px) {
+            #popupImage {
+                top: auto;
+                bottom: 10%;
+                left: 50%;
+                max-height: 70%;
+                transform: translate(-50%,0%);
+                max-width: 100%;
+            }
+        }
+
         /* 팝업 이미지 스타일 */
         #popupImg {
             width: 100%;
@@ -157,15 +176,6 @@
             cursor: pointer;
         }
 
-        @media (max-width: 1400px) {
-            #popupImage {
-                top: 50%;
-                left: 50%;
-                max-height: 95%;
-                transform: translate(-50%,0%);
-                max-width: 80%;
-            }
-        }
 
     </style>
 </head>
