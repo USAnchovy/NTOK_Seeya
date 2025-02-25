@@ -375,5 +375,18 @@
         "model": "iPhone 15 Pro",
         "focal": "62mm",
         "copyright": "윤이"
+    },
+    {
+        "id": "20250223_3.jpg",
+        "seat_id": "t1700030",
+        "performanceName": "창작가무극 <천 개의 파랑>",
+        "performanceDate": "2025-02-23",
+        "seatNumber": "1층 9열 14번",
+        "Grade": "R",
+        "image": "../1_photo/20250223_3.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "익명"
     }
 ]
