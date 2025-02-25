@@ -91,6 +91,19 @@
         "copyright": "며루치"
     },
     {
+        "id": "20240628_1.jpg",
+        "seat_id": "t1000022",
+        "performanceName": "국립창극단 <만신 : 페이퍼 샤먼>",
+        "performanceDate": "2024-06-28",
+        "seatNumber": "1층 2열 06번",
+        "Grade": "R",
+        "image": "../1_photo/20240628_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
         "id": "20231229_1.jpg",
         "seat_id": "t1100025",
         "performanceName": "국립극장 <세종의 노래>",
@@ -156,6 +169,19 @@
         "copyright": "며루치"
     },
     {
+        "id": "20241130_1.jpg",
+        "seat_id": "t1300025",
+        "performanceName": "관현악시리즈II <음악 오디세이:천하제일상>",
+        "performanceDate": "2024-11-30",
+        "seatNumber": "1층 5열 09번",
+        "Grade": "R",
+        "image": "../1_photo/20241130_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
         "id": "20240627_1.jpg",
         "seat_id": "t1200024",
         "performanceName": "국립창극단 <만신 : 페이퍼 샤먼>",
@@ -163,19 +189,6 @@
         "seatNumber": "1층 4열 08번",
         "Grade": "R",
         "image": "../1_photo/20240627_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
-        "id": "20240628_1.jpg",
-        "seat_id": "t1000022",
-        "performanceName": "국립창극단 <만신 : 페이퍼 샤먼>",
-        "performanceDate": "2024-06-28",
-        "seatNumber": "1층 2열 06번",
-        "Grade": "R",
-        "image": "../1_photo/20240628_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
@@ -247,19 +260,6 @@
         "copyright": "며루치"
     },
     {
-        "id": "20241130_1.jpg",
-        "seat_id": "t1300025",
-        "performanceName": "관현악시리즈II <음악 오디세이:천하제일상>",
-        "performanceDate": "2024-11-30",
-        "seatNumber": "1층 5열 09번",
-        "Grade": "R",
-        "image": "../1_photo/20241130_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
         "id": "20241225_1.jpg",
         "seat_id": "t1300022",
         "performanceName": "국립무용단 <향연>",
@@ -319,6 +319,19 @@
         "seatNumber": "2층 1열 12번",
         "Grade": "전석",
         "image": "../1_photo/20250205_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20250223_1.jpg",
+        "seat_id": "t1100012",
+        "performanceName": "창작가무극 <천 개의 파랑>",
+        "performanceDate": "2025-02-23",
+        "seatNumber": "1층 3열 06번",
+        "Grade": "R",
+        "image": "../1_photo/20250223_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
