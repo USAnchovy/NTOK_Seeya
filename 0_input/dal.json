@@ -13,6 +13,19 @@
         "copyright": "며루치"
     },
     {
+        "id": "20240518_1.jpg",
+        "seat_id": "t700031",
+        "performanceName": "국립창극단 <절창IV>",
+        "performanceDate": "2024-05-18",
+        "seatNumber": "1층 C열 19번",
+        "Grade": "R",
+        "image": "../1_photo/20240518_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
         "id": "20230926_1.jpg",
         "seat_id": "t1000028",
         "performanceName": "국립창극단 <심청가>",
@@ -20,6 +33,19 @@
         "seatNumber": "1층 F열 16번",
         "Grade": "R",
         "image": "../1_photo/20230926_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20241114_1.jpg",
+        "seat_id": "t1000028",
+        "performanceName": "국립창극단 <이날치전>",
+        "performanceDate": "2024-11-14",
+        "seatNumber": "1층 F열 16번",
+        "Grade": "R",
+        "image": "../1_photo/20241114_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
@@ -59,6 +85,19 @@
         "seatNumber": "1층 B열 15번",
         "Grade": "R",
         "image": "../1_photo/20230930_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20241220_1.jpg",
+        "seat_id": "t600028",
+        "performanceName": "국립창극단 <작은 창극 시리즈>",
+        "performanceDate": "2024-12-20",
+        "seatNumber": "1층 B열 15번",
+        "Grade": "S",
+        "image": "../1_photo/20241220_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
@@ -182,32 +221,6 @@
         "copyright": "며루치"
     },
     {
-        "id": "20240518_1.jpg",
-        "seat_id": "t700031",
-        "performanceName": "국립창극단 <절창IV>",
-        "performanceDate": "2024-05-18",
-        "seatNumber": "1층 C열 19번",
-        "Grade": "R",
-        "image": "../1_photo/20240518_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
-        "id": "20241114_1.jpg",
-        "seat_id": "t1000028",
-        "performanceName": "국립창극단 <이날치전>",
-        "performanceDate": "2024-11-14",
-        "seatNumber": "1층 F열 16번",
-        "Grade": "R",
-        "image": "../1_photo/20241114_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
         "id": "20241116_1.jpg",
         "seat_id": "t700027",
         "performanceName": "국립창극단 <이날치전>",
@@ -215,6 +228,32 @@
         "seatNumber": "1층 C열 15번",
         "Grade": "R",
         "image": "../1_photo/20241116_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20241221_1.jpg",
+        "seat_id": "t700027",
+        "performanceName": "국립창극단 <작은 창극 시리즈>",
+        "performanceDate": "2024-12-21",
+        "seatNumber": "1층 C열 15번",
+        "Grade": "R",
+        "image": "../1_photo/20241221_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
+        "id": "20241222_1.jpg",
+        "seat_id": "t700027",
+        "performanceName": "국립창극단 <작은 창극 시리즈>",
+        "performanceDate": "2024-12-22",
+        "seatNumber": "1층 C열 15번",
+        "Grade": "R",
+        "image": "../1_photo/20241222_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
@@ -260,45 +299,6 @@
         "copyright": "며루치"
     },
     {
-        "id": "20241220_1.jpg",
-        "seat_id": "t600028",
-        "performanceName": "국립창극단 <작은 창극 시리즈>",
-        "performanceDate": "2024-12-20",
-        "seatNumber": "1층 B열 15번",
-        "Grade": "S",
-        "image": "../1_photo/20241220_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
-        "id": "20241221_1.jpg",
-        "seat_id": "t700027",
-        "performanceName": "국립창극단 <작은 창극 시리즈>",
-        "performanceDate": "2024-12-21",
-        "seatNumber": "1층 C열 15번",
-        "Grade": "R",
-        "image": "../1_photo/20241221_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
-        "id": "20241222_1.jpg",
-        "seat_id": "t700027",
-        "performanceName": "국립창극단 <작은 창극 시리즈>",
-        "performanceDate": "2024-12-22",
-        "seatNumber": "1층 C열 15번",
-        "Grade": "R",
-        "image": "../1_photo/20241222_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
         "id": "20241227_1.jpg",
         "seat_id": "t700030",
         "performanceName": "2024 국립창극단 <송년음악회-어질더질>",
@@ -323,5 +323,31 @@
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
         "copyright": "며루치"
+    },
+    {
+        "id": "20241120_2.jpeg",
+        "seat_id": "t800013",
+        "performanceName": "국립창극단 <이날치전>",
+        "performanceDate": "2024-11-20",
+        "seatNumber": "1층 D열 05번",
+        "Grade": "R",
+        "image": "../1_photo/20241120_2.jpeg",
+        "available": true,
+        "model": "Unknown",
+        "focal": "Unknownmm",
+        "copyright": "윤이"
+    },
+    {
+        "id": "20241228_3.jpeg",
+        "seat_id": "t800032",
+        "performanceName": "2024 국립극장 <송년판소리>",
+        "performanceDate": "2024-12-28",
+        "seatNumber": "1층 D열 20번",
+        "Grade": "전",
+        "image": "../1_photo/20241228_3.jpeg",
+        "available": true,
+        "model": "iPhone 15 Pro",
+        "focal": "24mm",
+        "copyright": "윤이"
     }
 ]

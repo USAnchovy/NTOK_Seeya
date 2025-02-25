@@ -317,7 +317,7 @@
         "performanceName": "<2025 설날 음악회>",
         "performanceDate": "2025-02-05",
         "seatNumber": "2층 1열 12번",
-        "Grade": "전석",
+        "Grade": "전",
         "image": "../1_photo/20250205_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
@@ -336,5 +336,44 @@
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
         "copyright": "며루치"
+    },
+    {
+        "id": "20241228_4.jpeg",
+        "seat_id": "t1000041",
+        "performanceName": "2024 서울예술단 송년 갈라 SPACon",
+        "performanceDate": "2024-12-28",
+        "seatNumber": "1층 2열 03번",
+        "Grade": "R",
+        "image": "../1_photo/20241228_4.jpeg",
+        "available": true,
+        "model": "iPhone 15 Pro",
+        "focal": "24mm",
+        "copyright": "윤이"
+    },
+    {
+        "id": "20250205_2.jpeg",
+        "seat_id": "t4900032",
+        "performanceName": "<2025 설날 음악회>",
+        "performanceDate": "2025-02-05",
+        "seatNumber": "2층 2열 18번",
+        "Grade": "전",
+        "image": "../1_photo/20250205_2.jpeg",
+        "available": true,
+        "model": "iPhone 15 Pro",
+        "focal": "48mm",
+        "copyright": "윤이"
+    },
+    {
+        "id": "20250223_2.jpeg",
+        "seat_id": "t5000032",
+        "performanceName": "창작가무극 <천 개의 파랑>",
+        "performanceDate": "2025-02-23",
+        "seatNumber": "2층 3열 18번",
+        "Grade": "A",
+        "image": "../1_photo/20250223_2.jpeg",
+        "available": true,
+        "model": "iPhone 15 Pro",
+        "focal": "62mm",
+        "copyright": "윤이"
     }
 ]
