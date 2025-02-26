@@ -427,5 +427,18 @@
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
         "copyright": "며루치"
+    },
+    {
+        "id": "20240112_2.png",
+        "seat_id": "t900018",
+        "performanceName": "국립국악관현악단 <2024 신년 음악회>",
+        "performanceDate": "2024-01-12",
+        "seatNumber": "1층 1열 02번",
+        "Grade": "R",
+        "image": "../1_photo/20240112_2.png",
+        "available": true,
+        "model": "-",
+        "focal": "-mm",
+        "copyright": "윤이"
     }
 ]
