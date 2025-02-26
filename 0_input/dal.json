@@ -39,6 +39,32 @@
         "copyright": "며루치"
     },
     {
+        "id": "20241227_2.jpg",
+        "seat_id": "t900026",
+        "performanceName": "2024 국립창극단 <송년음악회-어질더질>",
+        "performanceDate": "2024-12-27",
+        "seatNumber": "1층 E열 14번",
+        "Grade": "전",
+        "image": "../1_photo/20241227_2.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "익명"
+    },
+    {
+        "id": "20240106_1.jpg",
+        "seat_id": "t900026",
+        "performanceName": "고도를 기다리며",
+        "performanceDate": "2024-01-06",
+        "seatNumber": "1층 E열 14번",
+        "Grade": "R",
+        "image": "../1_photo/20240106_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
         "id": "20241222_1.jpg",
         "seat_id": "t700027",
         "performanceName": "국립창극단 <작은 창극 시리즈>",
@@ -182,6 +208,19 @@
         "copyright": "며루치"
     },
     {
+        "id": "20241114_2.jpg",
+        "seat_id": "t600024",
+        "performanceName": "국립창극단 <이날치전>",
+        "performanceDate": "2024-11-14",
+        "seatNumber": "1층 B열 11번",
+        "Grade": "S",
+        "image": "../1_photo/20241114_2.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "13mm",
+        "copyright": "익명"
+    },
+    {
         "id": "20240518_1.jpg",
         "seat_id": "t700031",
         "performanceName": "국립창극단 <절창IV>",
@@ -293,19 +332,6 @@
         "seatNumber": "1층 F열 18번",
         "Grade": "전",
         "image": "../1_photo/20240314_1.jpg",
-        "available": true,
-        "model": "Galaxy S23 Ultra",
-        "focal": "23mm",
-        "copyright": "며루치"
-    },
-    {
-        "id": "20240106_1.jpg",
-        "seat_id": "t900026",
-        "performanceName": "고도를 기다리며",
-        "performanceDate": "2024-01-06",
-        "seatNumber": "1층 E열 14번",
-        "Grade": "R",
-        "image": "../1_photo/20240106_1.jpg",
         "available": true,
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
