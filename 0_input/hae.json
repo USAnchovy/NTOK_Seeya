@@ -1,5 +1,18 @@
 [
     {
+        "id": "20250226_1.jpg",
+        "seat_id": "t1300010",
+        "performanceName": "창작가무극 <천 개의 파랑>",
+        "performanceDate": "2025-02-26",
+        "seatNumber": "1층 5열 04번",
+        "Grade": "S",
+        "image": "../1_photo/20250226_1.jpg",
+        "available": true,
+        "model": "SM-S901N",
+        "focal": "23mm",
+        "copyright": "감씨"
+    },
+    {
         "id": "20250223_1.jpg",
         "seat_id": "t1100012",
         "performanceName": "창작가무극 <천 개의 파랑>",
@@ -312,6 +325,19 @@
         "copyright": "며루치"
     },
     {
+        "id": "20240112_2.png",
+        "seat_id": "t900018",
+        "performanceName": "국립국악관현악단 <2024 신년 음악회>",
+        "performanceDate": "2024-01-12",
+        "seatNumber": "1층 1열 02번",
+        "Grade": "R",
+        "image": "../1_photo/20240112_2.png",
+        "available": true,
+        "model": "-",
+        "focal": "-mm",
+        "copyright": "윤이"
+    },
+    {
         "id": "20231231_1.jpg",
         "seat_id": "t900012",
         "performanceName": "국립극장 <세종의 노래>",
@@ -427,18 +453,5 @@
         "model": "Galaxy S23 Ultra",
         "focal": "23mm",
         "copyright": "며루치"
-    },
-    {
-        "id": "20240112_2.png",
-        "seat_id": "t900018",
-        "performanceName": "국립국악관현악단 <2024 신년 음악회>",
-        "performanceDate": "2024-01-12",
-        "seatNumber": "1층 1열 02번",
-        "Grade": "R",
-        "image": "../1_photo/20240112_2.png",
-        "available": true,
-        "model": "-",
-        "focal": "-mm",
-        "copyright": "윤이"
     }
 ]
