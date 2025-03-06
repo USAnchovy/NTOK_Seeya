@@ -1,5 +1,18 @@
 [
     {
+        "id": "20250301_1.jpg",
+        "seat_id": "t1100026",
+        "performanceName": "창작가무극 <천 개의 파랑>",
+        "performanceDate": "2025-03-01",
+        "seatNumber": "1층 3열 10번",
+        "Grade": "R",
+        "image": "../1_photo/20250301_1.jpg",
+        "available": true,
+        "model": "Galaxy S23 Ultra",
+        "focal": "23mm",
+        "copyright": "며루치"
+    },
+    {
         "id": "20250226_1.jpg",
         "seat_id": "t1300010",
         "performanceName": "창작가무극 <천 개의 파랑>",
